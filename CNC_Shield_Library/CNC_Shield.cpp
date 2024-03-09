@@ -15,26 +15,52 @@ CNC_Shield::CNC_Shield(int StepPin, int DirPin, int LimitPin)
     _LimitPin = LimitPin;
 }
 
+CNC_Shield::CNC_Shield(int StepPin, int DirPin)
+{
+    _StepPin = StepPin;
+    _DirPin = DirPin;
+}
+
 void CNC_Shield::begin()
 {
     pinMode(_StepPin, OUTPUT);
     pinMode(_DirPin, OUTPUT);
-    pinMode(_LimitPin, INPUT_PULLUP);
+    if (NULL != _LimitPin)
+        pinMode(_LimitPin, INPUT_PULLUP);
     digitalWrite(_StepPin, LOW);
     digitalWrite(_DirPin, LOW);
+}
+
+void CNC_Shield::setDelay(int DelayMicroseconds)
+{
+    _DelayMicroseconds = DelayMicroseconds;
 }
 
 void CNC_Shield::step(int Steps, int Direction)
 {
     digitalWrite(_DirPin, Direction);
-    for(int i = 0; i < Steps; i++)
+    for (int i = 0; i < Steps; i++)
     {
-        if(!digitalRead(_LimitPin)) break;
-        else {
+        if (!digitalRead(_LimitPin))
+            break;
+        else
+        {
             digitalWrite(_StepPin, HIGH);
-            delayMicroseconds(450);
+            delayMicroseconds(_DelayMicroseconds);
             digitalWrite(_StepPin, LOW);
-            delayMicroseconds(450);
+            delayMicroseconds(_DelayMicroseconds);
         }
+    }
+}
+
+void CNC_Shield::stepNoLimit(int Steps, int Direction)
+{
+    digitalWrite(_DirPin, Direction);
+    for (int i = 0; i < Steps; i++)
+    {
+        digitalWrite(_StepPin, HIGH);
+        delayMicroseconds(_DelayMicroseconds);
+        digitalWrite(_StepPin, LOW);
+        delayMicroseconds(_DelayMicroseconds);
     }
 }
