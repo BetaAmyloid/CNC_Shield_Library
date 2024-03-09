@@ -1,0 +1,5 @@
+CNC_Shield  KEYWORD1
+begin       KEYWORD2
+step        KEYWORD2
+CW          KEYWORD2
+CCW         KEYWORD2
