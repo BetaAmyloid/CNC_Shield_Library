@@ -11,12 +11,17 @@
 
 class CNC_Shield
 {
-    public:
-        CNC_Shield(int StepPin, int DirPin, int LimitPin);
-        void begin();
-        void step(int Steps, int Direction);
-    private:
-        int _StepPin, _DirPin, _LimitPin;
+public:
+    CNC_Shield(int StepPin, int DirPin, int LimitPin);
+    CNC_Shield(int StepPin, int DirPin);
+    void begin();
+    void setDelay(int DelayMicroseconds);
+    void step(int Steps, int Direction);
+    void stepNoLimit(int Steps, int Direction);
+
+private:
+    int _StepPin, _DirPin, _LimitPin;
+    int _DelayMicroseconds = 500;
 };
 
 #endif
