@@ -29,7 +29,7 @@ void CNC_Shield::step(int Steps, int Direction)
     digitalWrite(_DirPin, Direction);
     for(int i = 0; i < Steps; i++)
     {
-        if(digitalRead(_LimitPin)) break;
+        if(!digitalRead(_LimitPin)) break;
         else {
             digitalWrite(_StepPin, HIGH);
             delayMicroseconds(450);
