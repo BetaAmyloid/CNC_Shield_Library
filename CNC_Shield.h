@@ -14,14 +14,15 @@ class CNC_Shield
 public:
     CNC_Shield(int StepPin, int DirPin, int LimitPin);
     CNC_Shield(int StepPin, int DirPin);
+    CNC_Shield(char Axis);
     void begin();
-    void setDelay(int DelayMicroseconds);
+    void setDelay(unsigned long DelayMicroseconds);
     void step(int Steps, int Direction);
     void stepNoLimit(int Steps, int Direction);
 
 private:
     int _StepPin, _DirPin, _LimitPin;
-    int _DelayMicroseconds = 500;
+    unsigned long _DelayMicroseconds = 500;
 };
 
 #endif
