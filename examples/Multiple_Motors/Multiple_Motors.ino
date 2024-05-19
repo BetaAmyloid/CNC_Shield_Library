@@ -19,8 +19,8 @@ void loop()
   stepper2.step(400, CW);
   stepper3.step(800, CW);
   delay(1000);
-  stepper1.step(200, CCW);
-  stepper2.step(400, CCW);
   stepper3.step(800, CCW);
+  stepper2.step(400, CCW);
+  stepper1.step(200, CCW);
   delay(1000);
 }
